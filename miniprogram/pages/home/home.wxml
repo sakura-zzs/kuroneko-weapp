@@ -1,0 +1,3 @@
+<!--pages/index.wxml-->
+<navigation-bar title="首页"/>
+<van-button plain type="primary" size="mini">朴素按钮</van-button>

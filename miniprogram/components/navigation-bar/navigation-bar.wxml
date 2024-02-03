@@ -1,0 +1,4 @@
+<!--components/navigation-bar.wxml-->
+<view class="bar">
+  <text class="bar-title">{{title}}</text>
+</view>

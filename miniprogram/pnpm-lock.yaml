@@ -1,0 +1,13 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@vant/weapp': ^1.11.4
+
+dependencies:
+  '@vant/weapp': 1.11.4
+
+packages:
+
+  /@vant/weapp/1.11.4:
+    resolution: {integrity: sha512-egOsWO4hVMP1SQSqQ46jy8UD3WysvlnUecRzPM21Y3ovkOFZ6wlaO7oHQmTXRpwr+V41Qri1qEbtNjhVxFqdyw==}
+    dev: false
