@@ -1,3 +1,11 @@
 <!--pages/index.wxml-->
 <navigation-bar title="首页"/>
-<van-button plain type="primary" size="mini">朴素按钮</van-button>
+<view class="home-header">
+  <image class="logo" src="../../assets/home/kuroneko-logo.png" mode="widthFix"/>
+  <van-search
+  value="{{ keyword }}"
+  shape="round"
+  background="#1f2233"
+  placeholder="请输入搜索关键词"
+/>
+</view>

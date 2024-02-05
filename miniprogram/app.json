@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/home/home",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/user/login/login"
   ],
   "tabBar": {
     "list": [
@@ -35,12 +36,13 @@
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "usingComponents": {
-    "navigation-bar":"components/navigation-bar/navigation-bar"
+    "navigation-bar": "components/navigation-bar/navigation-bar"
   },
   "resolveAlias": {
     "@components/*": "components/*",
     "@utils/*": "utils/*",
     "@assets/*": "assets/*",
-    "@vant/weapp/*": "miniprogram_npm/@vant/weapp/dist/*"
+    "@vant/weapp/*": "miniprogram_npm/@vant/weapp/dist/*",
+    "@services/*":"services/*"
   }
 }
