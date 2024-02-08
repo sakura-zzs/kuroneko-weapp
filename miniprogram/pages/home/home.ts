@@ -1,29 +1,45 @@
 // pages/index.ts
 import {login,bindAccountAndLogin} from '@services/user'
+import {createStoreBindings}from 'mobx-miniprogram-bindings'
+import homeStore from'@store/useHome'
+import {getLabelList}from '@services/home'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    keyword:""
+    keyword:"",
+    labelList:[],
+    active:0
   },
-
+  async getLabel(this:any){
+    const res=await getLabelList()
+    this.setLabelList(res)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  async onLoad() {
+  async onLoad(this:any) {
+    //获取标签数据
+    //使用createStoreBindings将store数据映射到页面实例中
+    this.homeStore=createStoreBindings(this,{
+      store:homeStore,
+      fields:['labelList'],
+      actions:['setLabelList']
+    })
+    await this.getLabel()
     //code只能使用一次，再次使用需要重新获取
-    const {code}=await wx.login()
-    const res=await login(code)
-    console.log(res)
-    if(res.code===1008){
-      //未注册
-      //模拟登录未注册，帐号绑定测试
-      const {code}=await wx.login()
-      const {token}=await bindAccountAndLogin(code,'2052400186@qq.com','123456')
-      console.log(token)
-    }
+    // const {code}=await wx.login()
+    // const res=await login(code)
+    // console.log(res)
+    // if(res.code===1008){
+    //   //未注册
+    //   //模拟登录未注册，帐号绑定测试
+    //   const {code}=await wx.login()
+    //   const {token}=await bindAccountAndLogin(code,'2052400186@qq.com','123456')
+    //   console.log(token)
+    // }
   },
 
   /**
@@ -50,8 +66,9 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload() {
-
+  onUnload(this:any) {
+    //卸载store
+    this.homeStore.destroyStoreBindings()
   },
 
   /**

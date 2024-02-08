@@ -43,6 +43,7 @@
     "@utils/*": "utils/*",
     "@assets/*": "assets/*",
     "@vant/weapp/*": "miniprogram_npm/@vant/weapp/dist/*",
-    "@services/*":"services/*"
+    "@services/*":"services/*",
+    "@store/*":"store/*"
   }
 }

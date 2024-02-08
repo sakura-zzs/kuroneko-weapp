@@ -8,4 +8,8 @@
   background="#1f2233"
   placeholder="请输入搜索关键词"
 />
+<van-tabs  active="{{ active }}">
+  <van-tab wx:for="{{labelList}}" wx:key="id" title="{{item.name}}"></van-tab>
+</van-tabs>
+
 </view>
