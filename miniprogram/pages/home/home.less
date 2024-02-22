@@ -1,11 +1,138 @@
 /* pages/index.wxss */
+image{
+  display: inline-block;
+  width: 48rpx;
+  height: 64rpx;
+}
 .home-header{
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 10rpx;
   background-color: #1f2233;
+  padding: 20px;
+  border-bottom: 1px solid #a2a2a2;
   .logo{
     width: 150rpx;
+  }
+}
+.van-ellipsis {
+  overflow: visible!important;
+  text-overflow: clip!important;
+}
+.moment-container{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  padding: 40rpx;
+  border-bottom: 2rpx solid #a2a2a2;
+}
+@hover-color: #00c3ff;
+.multi-line-ellipsis() {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.acticle-card-header {
+  display: flex;
+  align-items: center;
+  height: 48rpx;
+  .acticle-card__userinfo {
+    font-size: 24rpx;
+    .user-card {
+      display: flex;
+      align-items: center;
+      .user-nickname {
+        .multi-line-ellipsis();
+      }
+      .page-to {
+        color: #666;
+        margin-right: 20rpx;
+      }
+      .page-to:hover {
+        color: #4cd1e0;
+      }
+    }
+  }
+  .acticle-card-time {
+    .multi-line-ellipsis();
+  }
+  p {
+    font-size: 24rpx;
+    color: #ccc;
+  }
+}
+.acticle-card-main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  .acticle-title {
+    .multi-line-ellipsis();
+    height: 40rpx;
+    margin-top: 16rpx;
+    padding-right: 200rpx;
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #333;
+  }
+  .acticle--card__content {
+    height: 260rpx;
+    display: flex;
+    margin-top: 20rpx;
+    .acticle-preview {
+      image {
+        height: 260rpx;
+        border-radius: 10rpx;
+        margin-right: 20rpx;
+      }
+    }
+    .acticle-content {
+      height: 260rpx;
+      //多行省略
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 8;
+      color: #999;
+      font-size: 28rpx;
+    }
+  }
+}
+.acticle-card-main:hover .acticle-title {
+  color: @hover-color;
+}
+.article-card-footer {
+  display: flex;
+  justify-content: space-between;
+  .article-card-data {
+    display: flex;
+    align-items: center;
+    height: 48rpx;
+    margin-top: 10rpx;
+    color: #ccc;
+    font-size: 28rpx;
+    .page-to1 {
+      color: #ccc;
+      & + .acticle-card-data-item {
+        margin-left: 20rpx;
+      }
+    }
+    .acticle-card-data-item {
+      display: flex;
+      align-items: center;
+      image {
+        cursor: pointer;
+        width: 1.2em;
+        height: 1.2em;
+      }
+      text {
+        margin-left: 16rpx;
+        width: 100rpx;
+      }
+    }
   }
 }

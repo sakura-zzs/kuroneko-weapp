@@ -1,0 +1,17 @@
+function getContentText(wangEditorChildren) {
+  wangEditorChildren = JSON.parse(wangEditorChildren)
+  var res = ''
+  wangEditorChildren.forEach(function(item){
+    item.children.forEach(function(i){
+      if (i.text != null) {
+        // console.log(i.text)
+        res += i.text
+      }
+    })
+    res += '\n'
+  })
+  return res
+}
+module.exports={
+  getContentText:getContentText
+}

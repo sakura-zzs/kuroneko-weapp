@@ -1,0 +1,31 @@
+<!--pages/article/article.wxml-->
+<navigation-bar title="详情页">
+<view class="page-back" slot="left">
+  <navigator open-type="navigateBack" delta="1">
+  <image src="../../assets/navigation-bar/back.svg"/>
+  </navigator>
+</view>
+</navigation-bar>
+<view class="main-content">
+  <view class="article-container">
+    <view class="article-header">
+            <view class="article-title">
+              <h1>{{ momentData.title }}</h1>
+            </view>
+            <view class="article-info">
+              <view class="article-info-item-count"><image src="../../assets/common/view.svg"/><text>1</text></view>
+              <view class="article-info-item-count"><image src="../../assets/common/comment.svg"/><text>1</text></view>
+              <view class="article-info-item-count">
+                <image src="../../assets/common/favor.svg"/>
+                <text>1</text>
+              </view>
+              <view class="article-info-item-count"><image src="../../assets/common/star.svg"/><text>1</text></view>
+            </view>
+            <view class="article-update-time">
+              <text>文章发表: {{ momentData.createTime }}</text>
+              <text>最后编辑: {{ momentData.updateTime }}</text>
+            </view>
+          </view>
+          <rich-text nodes="{{momentData.html}}"/>
+        </view>
+</view>

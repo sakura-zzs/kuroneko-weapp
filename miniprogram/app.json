@@ -2,7 +2,8 @@
   "pages": [
     "pages/home/home",
     "pages/user/user",
-    "pages/user/login/login"
+    "pages/user/login/login",
+    "pages/article/article"
   ],
   "tabBar": {
     "list": [
@@ -43,7 +44,7 @@
     "@utils/*": "utils/*",
     "@assets/*": "assets/*",
     "@vant/weapp/*": "miniprogram_npm/@vant/weapp/dist/*",
-    "@services/*":"services/*",
-    "@store/*":"store/*"
+    "@services/*": "services/*",
+    "@store/*": "store/*"
   }
 }

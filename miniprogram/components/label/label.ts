@@ -1,17 +1,13 @@
-// components/navigation-bar.ts
+// components/label/label.ts
 Component({
 
   /**
    * 组件的属性列表
    */
-  options:{
-    // 开启多插槽
-  multipleSlots:true
-  },
   properties: {
-    title:{
-      type:String,
-      value:"默认标题"
+    labelList:{
+      type:Array,
+      value:[]
     }
   },
 

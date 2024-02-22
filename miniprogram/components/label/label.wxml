@@ -1,0 +1,10 @@
+<!--components/label/label.wxml-->
+<view class="tag-container">
+    <view class="tags">
+      <view class="tag" wx:for="{{labelList}}" wx:key="id">
+        <view class="label-page-to" bind:tap="handleSearch(item.name)">
+          <text>{{ item.name }}</text>
+        </view>
+      </view>
+    </view>
+  </view>

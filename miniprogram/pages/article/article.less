@@ -1,0 +1,76 @@
+/* pages/article/article.wxss */
+.page-back{
+  position: absolute;
+  left: 0;
+  image{
+    width: 32rpx;
+    height: 32rpx;
+  }
+}
+image{
+  width: 1.2em;
+  height: 1.2em;
+}
+.article-info-item-count {
+  display: flex;
+  margin-left: 60rpx;
+  text-align: center;
+  color: #ccc;
+}
+.article-container {
+  padding: 40rpx 50rpx;
+  background-color: #fff;
+  .article-header {
+    .article-title h1 {
+      font-size: 44rpx;
+      line-height: 52rpx;
+      margin: 0;
+    }
+    .article-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80rpx;
+      padding: 0 30rpx;
+      background-color: #f7f8fc;
+      margin-top: 30rpx;
+      border-radius: 10rpx;
+    }
+    .article-update-time {
+      text-align: center;
+      color: #ccc;
+      margin-top: 40rpx;
+      font-size: 28rpx;
+      text {
+        padding: 0 12rpx;
+        line-height: 36rpx;
+      }
+      text + text {
+        border-left: 2rpx solid #ccc;
+      }
+    }
+  }
+  .article-footer {
+    margin-top: 60rpx;
+    .article-footer-info {
+      display: flex;
+      justify-content: center;
+      margin-top: 60rpx;
+      padding-top: 80rpx;
+      border-top: 2rpx solid #f0f0f0;
+      .article-info-item-count {
+        display: flex;
+        align-items: center;
+        font-size: 56rpx;
+        color: #999;
+        text {
+          margin-left: 40rpx;
+          font-size: 28rpx;
+        }
+      }
+      .article-info-item-count + .article-info-item-count {
+        margin-left: 200rpx;
+      }
+    }
+  }
+}

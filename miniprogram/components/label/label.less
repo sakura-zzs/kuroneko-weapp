@@ -1,0 +1,29 @@
+/* components/label/label.wxss */
+@hover-color: #00c3ff;
+
+.tag-container {
+  display: flex;
+  justify-content: space-between;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  height: 58rpx;
+  font-size: 24rpx;
+}
+.tags .tag {
+  height: 48rpx;
+  line-height: 48rpx;
+  border-radius: 24rpx;
+  margin-right: 20rpx;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  .label-page-to {
+    padding: 0 24rpx;
+    color: #666;
+  }
+  .label-page-to:hover {
+    color: @hover-color;
+  }
+}

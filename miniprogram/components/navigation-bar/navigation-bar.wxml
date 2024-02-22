@@ -1,4 +1,5 @@
 <!--components/navigation-bar.wxml-->
 <view class="bar">
+  <slot name="left"></slot>
   <text class="bar-title">{{title}}</text>
 </view>

@@ -2,7 +2,7 @@
 import {login,bindAccountAndLogin} from '@services/user'
 import {createStoreBindings}from 'mobx-miniprogram-bindings'
 import homeStore from'@store/useHome'
-import {getLabelList}from '@services/home'
+import {getLabelList, getMomentList}from '@services/home'
 Page({
 
   /**
@@ -11,11 +11,23 @@ Page({
   data: {
     keyword:"",
     labelList:[],
+    momentList:[],
+    labelMoment:[],
     active:0
   },
   async getLabel(this:any){
     const res=await getLabelList()
     this.setLabelList(res)
+  },
+  async getMoment(this:any){
+    const res=await getMomentList()
+    this.setMomentList(res)
+  },
+  initLabelMoment(this:any){
+    this.setLabelMoment(this.data.labelList[0].name)
+  },
+  getLabelMoment(this:any,labelName:string){
+    this.setLabelMoment(labelName)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -25,10 +37,12 @@ Page({
     //使用createStoreBindings将store数据映射到页面实例中
     this.homeStore=createStoreBindings(this,{
       store:homeStore,
-      fields:['labelList'],
-      actions:['setLabelList']
+      fields:['labelList','momentList','labelMoment'],
+      actions:['setLabelList','setMomentList','setLabelMoment']
     })
     await this.getLabel()
+    await this.getMoment()
+    this.initLabelMoment()
     //code只能使用一次，再次使用需要重新获取
     // const {code}=await wx.login()
     // const res=await login(code)
@@ -41,7 +55,15 @@ Page({
     //   console.log(token)
     // }
   },
-
+  showLabelMoment(data:any){
+    this.getLabelMoment(data.detail.title)
+  },
+  goToArticleDetail(e:WechatMiniprogram.BaseEvent){
+    // 小程序的事件处理函数传参需要通过data-传递
+    wx.navigateTo({
+      url:e.currentTarget.dataset.path,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -82,7 +104,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-
+    console.log(1)
   },
 
   /**

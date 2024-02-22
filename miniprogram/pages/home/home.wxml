@@ -1,15 +1,60 @@
 <!--pages/index.wxml-->
+<wxs src="../../utils/getContentText.wxs" module="tools"/>
 <navigation-bar title="首页"/>
 <view class="home-header">
-  <image class="logo" src="../../assets/home/kuroneko-logo.png" mode="widthFix"/>
+  <image class="logo" mode="widthFix" src="../../assets/home/kuroneko-logo.png" mode="widthFix"/>
   <van-search
   value="{{ keyword }}"
   shape="round"
   background="#1f2233"
   placeholder="请输入搜索关键词"
 />
-<van-tabs  active="{{ active }}">
-  <van-tab wx:for="{{labelList}}" wx:key="id" title="{{item.name}}"></van-tab>
-</van-tabs>
-
 </view>
+<van-tabs bind:click="showLabelMoment" active="{{ active }}">
+  <van-tab   wx:for="{{labelList}}" wx:key="id" title="{{item.name}}"></van-tab>
+</van-tabs>
+<scroll-view scroll-y="true">
+<view class="moment-container" wx:for="{{labelMoment}}" wx:key="id">
+  <view class="acticle-card-header">
+          <view class="acticle-card__userinfo">
+            <view class="user-card">
+              <view url="{{'/user/' + item.userId}}" class="user-avatar page-to">
+                <image wx:if="item.avatar.url" src="{{item.avatar.url}}" />
+                <image wx:else src="../../assets/home/user_default.png" />
+              </view>
+              <view url="{{'/user/' + item.userId}}" class="user-nickname page-to">
+                {{item.profile.nickName ? item.profile.nickName : '匿名用户'}}
+              </view>
+            </view>
+          </view>
+          <p class="acticle-card-time">{{ item.createTime }}</p>
+        </view>
+        <view bind:tap="goToArticleDetail" class="acticle-card-main" data-path="{{'../article/article?id='+item.id}}">
+          <h3 class="acticle-title">{{ item.title }}</h3>
+          <view class="acticle--card__content">
+            <view wx:if="{{item.momentImg[0].url}}" class="acticle-preview">
+              <image mode="heightFix" src="{{item.momentImg[0].url}}" />
+            </view>
+            <view class="acticle-content">
+              {{ tools.getContentText(item.content) }}
+            </view>
+          </view>
+        </view>
+        <view class="article-card-footer">
+          <!-- <Label @searching="searching" :labelList="item.labelList" /> -->
+          <kk-label labelList="{{item.labelList}}" />
+          <view class="article-card-data">
+            <view class="page-to1" href="'/article/' + item.id + '#reply'">
+              <view class="acticle-card-data-item">
+                <van-icon name="chat" color="#ccc" size="1.2em"/><text>{{ item.commentCount }}</text>
+              </view>
+            </view>
+            <view class="acticle-card-data-item">
+              <image src="../../assets/common/favor.svg"/>
+              <text>1</text>
+            </view>
+          </view>
+        </view>
+</view>
+  
+</scroll-view>
