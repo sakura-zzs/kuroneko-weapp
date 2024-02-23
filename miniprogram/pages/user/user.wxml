@@ -1,2 +1,3 @@
 <!--pages/user/user.wxml-->
 <navigation-bar title="个人中心"/>
+<navigator url="../publish/publish">发布</navigator>

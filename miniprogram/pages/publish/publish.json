@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "kk-editor":"../../components/kk-editor/kk-editor",
+    "van-field": "@vant/weapp/field/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-tree-select": "@vant/weapp/tree-select/index"
+  }
+}

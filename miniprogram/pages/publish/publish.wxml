@@ -1,0 +1,37 @@
+<!--pages/publish/publish.wxml-->
+<navigation-bar title="发布页"/>
+<van-field
+    value="{{ title }}"
+    label="标题"
+    placeholder="请输入标题"
+    bind:change="onChange"
+  />
+  <van-field
+    label="内容"
+    readonly
+    border="{{ false }}"
+  />
+<view class="editor-container">
+  <kk-editor class="my-editor" />
+</view>
+<van-field
+    value="{{ labelSelected }}"
+    center
+    clearable
+    label="标签"
+    border="{{ false }}"
+    use-button-slot
+  >
+    <van-button slot="button" size="small" type="primary" bind:tap="handleShowPopup">
+      选择标签
+    </van-button>
+  </van-field>
+  <van-popup show="{{ isShowPopup }}" bind:close="onClose" position="bottom" closeable>
+    <van-tree-select
+  items="{{ labelSelectMenu }}"
+  active-id="{{ selectedId }}"
+  max="{{ maxSelectedCount }}"
+  bind:click-item="onClickItem"
+/>
+  </van-popup>
+<button bind:tap="publishing">发布</button>

@@ -26,6 +26,21 @@
               <text>最后编辑: {{ momentData.updateTime }}</text>
             </view>
           </view>
-          <rich-text nodes="{{momentData.html}}"/>
+          <view class="article-rich-text">
+            <rich-text nodes="{{momentData.html}}"/>
+          </view>
+          <view class="article-footer">
+            <view class="article-tags">
+              <kk-label labelList="{{momentData.labelList}}" />
+            </view>
+            <view class="article-footer-info">
+              <view class="article-info-item-count">
+                <image src="../../assets/common/favor.svg"/>
+                <text>1</text>
+              </view>
+              <view class="article-info-item-count"><image src="../../assets/common/star.svg"/><text>1</text></view>
+            </view>
+          </view>
         </view>
+
 </view>
