@@ -1,11 +1,5 @@
 <!--pages/article/article.wxml-->
-<navigation-bar title="详情页">
-<view class="page-back" slot="left">
-  <navigator open-type="navigateBack" delta="1">
-  <image src="../../assets/navigation-bar/back.svg"/>
-  </navigator>
-</view>
-</navigation-bar>
+<navigation-bar title="详情页" back/>
 <view class="main-content">
   <view class="article-container">
     <view class="article-header">

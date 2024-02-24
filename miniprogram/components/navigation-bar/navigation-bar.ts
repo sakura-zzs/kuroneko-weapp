@@ -12,6 +12,10 @@ Component({
     title:{
       type:String,
       value:"默认标题"
+    },
+    back:{
+      type:Boolean,
+      value:false
     }
   },
 

@@ -1,2 +1,43 @@
 <!--pages/user/login/login.wxml-->
-<text>pages/user/login/login.wxml</text>
+<van-overlay show="{{ isShowLoginWindow }}" catch:click="onClickHide">
+  <view class="login-wrapper">
+    <image class="logo" mode="widthFix" src="../../../assets/home/kuroneko-logo.png" mode="widthFix"/>
+    <view class="login" catch:tap="handleLogin">
+    登录
+    </view>
+    <text class="hint-text">登录kuroneko·精彩不容错过</text>
+    <text class="wait-login" catch:tap="backToHome">暂不登录</text>
+    <van-popup
+  show="{{ isShowLoginForm }}"
+  closeable
+  round
+  position="bottom"
+  custom-style="height: 50%"
+  catch:close="onClose"
+>
+<van-cell-group inset title="帐号绑定">
+  <van-field
+  label="帐号"
+    value="{{ value }}"
+    type="email"
+    placeholder="请输入邮箱"
+    border="{{ false }}"
+    bind:change="onChange"
+    catch:tap
+  />
+  <van-field
+  label="密码"
+    value="{{ value }}"
+    type="password"
+    placeholder="请输入密码"
+    border="{{ false }}"
+    bind:change="onChange"
+    catch:tap
+  />
+</van-cell-group>
+<view class="submit" catch:tap="submit">
+  <van-icon name="success" color="green" />
+</view>
+</van-popup>
+  </view>
+</van-overlay>

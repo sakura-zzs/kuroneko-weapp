@@ -50,16 +50,16 @@ Component({
       console.log(e.detail.delta.ops)
       console.log("html",e.detail.html)
       const ops=e.detail.delta.ops
-      ops.forEach(e=>{
-        if(e.attributes&&e.insert)
-        e.insert.image='http://localhost:8001/1698588507805.png'
-      })
-      this.kkEditor.setContents({delta:ops})
-      this.kkEditor.getContents({
-        success:res=>{
-          console.log(res.html)
-        }
-      })
+      // ops.forEach(e=>{
+      //   if(e.attributes&&e.insert.image)
+      //   e.insert.image='http://localhost:8001/1698588507805.png'
+      // })
+      // this.kkEditor.setContents({delta:ops})
+      // this.kkEditor.getContents({
+      //   success:res=>{
+      //     console.log(res.html)
+      //   }
+      // })
     },
     onBlur(e:WechatMiniprogram.EditorBlur){
       //编辑器失去焦点，收起键盘  
@@ -127,6 +127,9 @@ Component({
     //插入分割线
     addDivider(){
       this.kkEditor.insertDivider()
+    },
+    clearFormat(){
+      this.kkEditor.removeFormat()
     }
   },
   created(){

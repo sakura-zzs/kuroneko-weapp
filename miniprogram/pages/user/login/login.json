@@ -1,3 +1,10 @@
 {
-  "usingComponents": {}
+  "component": true,
+  "usingComponents": {
+    "van-overlay": "@vant/weapp/overlay/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-icon": "@vant/weapp/icon/index"
+  }
 }

@@ -1,5 +1,5 @@
 // pages/index.ts
-import {login,bindAccountAndLogin} from '@services/user'
+import {login,bindAccountAndLogin,checkLogin} from '@services/user'
 import {createStoreBindings}from 'mobx-miniprogram-bindings'
 import homeStore from'@store/useHome'
 import {getLabelList, getMomentList}from '@services/home'
@@ -13,6 +13,7 @@ Page({
     labelList:[],
     momentList:[],
     labelMoment:[],
+    loginStatus:false,
     active:0
   },
   async getLabel(this:any){
@@ -22,6 +23,11 @@ Page({
   async getMoment(this:any){
     const res=await getMomentList()
     this.setMomentList(res)
+  },
+  //检测登录状态
+  async getLoginStatus(this:any){
+    const loginStatus=await checkLogin()
+    this.setLoginStatus(loginStatus)
   },
   initLabelMoment(this:any){
     this.setLabelMoment(this.data.labelList[0].name)
@@ -37,9 +43,10 @@ Page({
     //使用createStoreBindings将store数据映射到页面实例中
     this.homeStore=createStoreBindings(this,{
       store:homeStore,
-      fields:['labelList','momentList','labelMoment'],
-      actions:['setLabelList','setMomentList','setLabelMoment']
+      fields:['labelList','momentList','labelMoment','loginStatus'],
+      actions:['setLabelList','setMomentList','setLabelMoment','setLoginStatus']
     })
+    
     await this.getLabel()
     await this.getMoment()
     this.initLabelMoment()

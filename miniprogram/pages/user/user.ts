@@ -1,18 +1,24 @@
 // pages/user/user.ts
+import {createStoreBindings}from 'mobx-miniprogram-bindings'
+import homeStore from'@store/useHome'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    loginStatus:false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad() {
-
+  onLoad(this:any) {
+    this.homeStore=createStoreBindings(this,{
+      store:homeStore,
+      fields:['loginStatus'],
+      actions:[]
+    })
   },
 
   /**

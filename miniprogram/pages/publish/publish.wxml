@@ -1,10 +1,9 @@
 <!--pages/publish/publish.wxml-->
-<navigation-bar title="发布页"/>
+<navigation-bar title="发布页" back/>
 <van-field
-    value="{{ title }}"
+    model:value="{{ title }}"
     label="标题"
     placeholder="请输入标题"
-    bind:change="onChange"
   />
   <van-field
     label="内容"

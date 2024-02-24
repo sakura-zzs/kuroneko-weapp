@@ -1,5 +1,10 @@
 <!--components/navigation-bar.wxml-->
 <view class="bar">
   <slot name="left"></slot>
+  <view class="page-back" wx:if="{{back}}">
+  <navigator open-type="navigateBack" delta="1">
+  <image src="../../assets/navigation-bar/back.svg"/>
+  </navigator>
+</view>
   <text class="bar-title">{{title}}</text>
 </view>

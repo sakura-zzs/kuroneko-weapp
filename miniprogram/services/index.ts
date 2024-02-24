@@ -10,11 +10,14 @@ class KuronekoRequest{
     this.BASE_URL=BASE_URL
   }
   private request(option:WechatMiniprogram.RequestOption):Promise<any>{
+    //携带token
+    const token=wx.getStorageSync('token')
     return new Promise((resolve,reject)=>{
       wx.request({
         // 如果同名属性在展开运算符后，则展开运算符不会覆盖后面的同名属性
         ...option,
         url:this.BASE_URL+option.url,
+        header:{...option.header,'AUTHORIZATION':`Bearer ${token}`},
         success:res=>resolve(res.data),
         fail:err=>reject(err)
       })

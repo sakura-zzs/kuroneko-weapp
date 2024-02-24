@@ -1,6 +1,7 @@
 // pages/publish/publish.ts
 import {createStoreBindings}from 'mobx-miniprogram-bindings'
 import homeStore from'@store/useHome'
+import {getEditorContents,uploadImage} from '@utils/util'
 Page({
 
   /**
@@ -39,13 +40,20 @@ Page({
     //最大选中数
     maxSelectedCount:5    
   },
-  publishing(){
+  async publishing(){
     const myEditor= this.selectComponent('.my-editor')
-    myEditor.kkEditor.getContents({
-      success:res=>{
-        console.log(res.html)
-      }
+    const {html,text,delta}=await getEditorContents(myEditor)
+    console.log(html,text,delta)
+    //获取编辑器内容中所有的临时图片路径进行上传
+    const tempFilePaths:Array<any>=[]
+    delta.ops.forEach(e=>{
+      if(e.attributes&&e.insert.image)
+       tempFilePaths.push(uploadImage(e.insert.image))
     })
+    console.log(tempFilePaths)
+    const realFilePaths=await Promise.all(tempFilePaths)
+    console.log(realFilePaths)
+    console.log(this.data)
     wx.switchTab({url:'../home/home'})
   },
   handleShowPopup(){
