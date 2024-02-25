@@ -1,5 +1,5 @@
 <!--pages/user/login/login.wxml-->
-<van-overlay show="{{ isShowLoginWindow }}" catch:click="onClickHide">
+<van-overlay show="{{ isShowLoginWindow }}" >
   <view class="login-wrapper">
     <image class="logo" mode="widthFix" src="../../../assets/home/kuroneko-logo.png" mode="widthFix"/>
     <view class="login" catch:tap="handleLogin">
@@ -18,20 +18,20 @@
 <van-cell-group inset title="帐号绑定">
   <van-field
   label="帐号"
-    value="{{ value }}"
+    model:value="{{ email }}"
     type="email"
     placeholder="请输入邮箱"
     border="{{ false }}"
-    bind:change="onChange"
+    bind:blur="validateEmail"
     catch:tap
   />
   <van-field
   label="密码"
-    value="{{ value }}"
+    model:value="{{ pwd }}"
     type="password"
     placeholder="请输入密码"
     border="{{ false }}"
-    bind:change="onChange"
+    bind:blur="validatePass"
     catch:tap
   />
 </van-cell-group>

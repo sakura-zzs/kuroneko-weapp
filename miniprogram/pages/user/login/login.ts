@@ -1,4 +1,8 @@
 // pages/user/login/login.ts
+import {login,bindAccountAndLogin} from '@services/user'
+import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
+import {createStoreBindings}from 'mobx-miniprogram-bindings'
+import homeStore from'@store/useHome'
 Component({
 
   /**
@@ -14,9 +18,17 @@ Component({
   /**
    * 组件的初始数据
    */
+  observers:{
+    loginStatus:function (newVal,oldVal){
+      this.setData({isShowLoginWindow:!newVal})
+    }
+  },
   data: {
     isShowLoginWindow:true,
-    isShowLoginForm:false
+    isShowLoginForm:false,
+    email:'',
+    pwd:'',
+    loginStatus:false
   },
 
   /**
@@ -38,6 +50,56 @@ Component({
     },
     onClose(){
       this.setData({isShowLoginForm:false})
+    },
+    async submit(){
+      if(!this.validateEmail()&&!this.validatePass()) return Toast.fail('请检查邮箱和密码!')
+      //验证邮箱和密码格式
+      const {email,pwd}=this.data
+          //code只能使用一次，再次使用需要重新获取
+    // const {code}=await wx.login()
+    //login用于用户进入小程序的默认登录行为，只有用户进行了登录行为绑定过才会直接登录，否则会返回错误
+    // const res=await login(code)
+    // console.log(res)
+    // if(res.code===1008){
+      //未注册
+      //模拟登录未注册，帐号绑定测试
+      const {code}=await wx.login()
+      const res=await bindAccountAndLogin(code,email,pwd)
+      if(res.code==1004)
+      return Toast.fail('用户不存在，请前往官网注册帐号!')
+      if(res.token)
+      wx.setStorageSync('token',res.token)
+      this.setLoginStatus(true)
+      wx.switchTab({url:'/user'})
+      return Toast.success('登录成功!')
+    // }
+    },
+    validateEmail():Boolean{
+      const emailReg = /^[0-9a-zA-Z_-]+@[0-9a-zA-Z_-]+(.[0-9a-zA-Z_-]+)+$/
+      const {email}=this.data
+      const emailIsTrue=emailReg.test(email)
+      if (!emailIsTrue) {
+        Toast.fail('请检查邮箱输入！')
+        return false
+      }
+      return true
+    },
+    validatePass():Boolean{
+      const {pwd}=this.data
+      const pwdReg = /^[0-9a-zA-Z]{6,16}$/
+      const pwdIsTrue = pwdReg.test(pwd)
+      if (!pwdIsTrue) {
+        Toast.fail('请检查密码输入！')
+        return false
+      }
+      return true
     }
+  },
+  created(){
+    this.homeStore=createStoreBindings(this,{
+      store:homeStore,
+      fields:['loginStatus'],
+      actions:['setLoginStatus']
+    })
   }
 })

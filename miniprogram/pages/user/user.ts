@@ -9,7 +9,10 @@ Page({
   data: {
     loginStatus:false
   },
-
+  publishing(){
+    if(this.data.loginStatus)
+    wx.navigateTo({url:'../publish/publish'})
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -1,4 +1,5 @@
 <!--pages/user/user.wxml-->
+<van-toast id="van-toast" />
 <navigation-bar title="个人中心"/>
-<navigator url="../publish/publish">发布</navigator>
+<view bind:tap="publishing">发布</view>
 <login loginStatus="{{loginStatus}}"/>

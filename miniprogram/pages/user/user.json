@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "login":"../user/login/login"
+    "login":"../user/login/login",
+    "van-toast": "@vant/weapp/toast/index"
   }
 }

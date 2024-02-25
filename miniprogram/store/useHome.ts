@@ -46,7 +46,7 @@ export interface IHomeStoreThisType{
   momentList:Array<IMomentData>,
   labelMoment:Array<IMomentData>,
   momentData:IMomentData|undefined,
-  isLogin:Boolean
+  loginStatus:Boolean
 }
 const homeStore=observable({
   //数据
@@ -54,7 +54,7 @@ const homeStore=observable({
   momentList:[],
   labelMoment:[],
   momentData:"",
-  isLogin:false,
+  loginStatus:false,
   //修改数据的action
   setLabelList:action(function(this:IHomeStoreThisType,list:Array<ILabelList>){
     this.labelList=list
@@ -76,7 +76,8 @@ const homeStore=observable({
     this.momentData= this.momentList.find(e=>e.id===id)
   }),
   setLoginStatus:action(function(this:IHomeStoreThisType,isLogin:Boolean){
-    this.isLogin=isLogin
+    this.loginStatus=isLogin
+
   })
 })
 export default homeStore
