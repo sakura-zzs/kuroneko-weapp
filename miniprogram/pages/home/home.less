@@ -136,3 +136,25 @@ image{
     }
   }
 }
+.login-hint{
+  position: sticky;
+  bottom: 0;
+  van-notice-bar{
+    position: relative;
+    .van-notice-bar{
+      margin: 20rpx;
+      border-radius: 20rpx!important;
+      background-color:rgba(0, 0, 0, .3)!important;
+      color: #fff!important;
+    }
+  }
+}
+
+scroll-view{
+  position: relative;
+  .loading van-loading{
+    position: relative;
+    left: 50%;
+    margin-left: -50rpx;
+  }
+}

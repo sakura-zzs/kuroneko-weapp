@@ -1,6 +1,8 @@
 {
 	"dependencies": {
+		"@types/lodash": "^4.14.202",
 		"@vant/weapp": "^1.11.4",
+		"loadsh": "^0.0.4",
 		"mobx-miniprogram": "^4.13.2",
 		"mobx-miniprogram-bindings": "^2.1.5"
 	}

@@ -1,16 +1,24 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@types/lodash': ^4.14.202
   '@vant/weapp': ^1.11.4
+  loadsh: ^0.0.4
   mobx-miniprogram: ^4.13.2
   mobx-miniprogram-bindings: ^2.1.5
 
 dependencies:
+  '@types/lodash': 4.14.202
   '@vant/weapp': 1.11.4
+  loadsh: 0.0.4
   mobx-miniprogram: 4.13.2
   mobx-miniprogram-bindings: 2.1.5_mobx-miniprogram@4.13.2
 
 packages:
+
+  /@types/lodash/4.14.202:
+    resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
+    dev: false
 
   /@types/wechat-miniprogram/3.4.7:
     resolution: {integrity: sha512-X6SVOOaTPQN24lYBSV5jLuWyIedx8DGJnT0VUBnoNzJruhxotCL28ecGb7AO5JfXOXtHqSS5+CnJ70NxFxmisA==}
@@ -18,6 +26,11 @@ packages:
 
   /@vant/weapp/1.11.4:
     resolution: {integrity: sha512-egOsWO4hVMP1SQSqQ46jy8UD3WysvlnUecRzPM21Y3ovkOFZ6wlaO7oHQmTXRpwr+V41Qri1qEbtNjhVxFqdyw==}
+    dev: false
+
+  /loadsh/0.0.4:
+    resolution: {integrity: sha512-U+wLL8InpfRalWrr+0SuhWgGt10M4OyAk6G8xCYo2rwpiHtxZkWiFpjei0vO463ghW8LPCdhqQxXlMy2qicAEw==}
+    deprecated: This is a typosquat on the popular Lodash package. This is not maintained nor is the original Lodash package.
     dev: false
 
   /mobx-miniprogram-bindings/2.1.5_mobx-miniprogram@4.13.2:

@@ -64,13 +64,16 @@ const homeStore=observable({
   }),
   setLabelMoment:action(function(this:IHomeStoreThisType,labelName:string){
     //mobx的state不能直接push
+    if(labelName==='All') return this.labelMoment=this.momentList
     let temList:Array<IMomentData>=[]
     this.momentList.forEach(e => {
       if(JSON.stringify(e?.labelList).indexOf(labelName)!==-1){
         temList.push(e)
       }
     })
-    this.labelMoment=temList
+    //暂无该标签数据
+    if(!temList.length) return false
+    return this.labelMoment=temList
   }),
   setMomentData:action(function(this:IHomeStoreThisType,id:number){
     this.momentData= this.momentList.find(e=>e.id===id)

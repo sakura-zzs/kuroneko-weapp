@@ -10,11 +10,13 @@
   placeholder="请输入搜索关键词"
 />
 </view>
-<van-tabs bind:click="showLabelMoment" active="{{ active }}">
+<van-tabs class="label-list" bind:click="showLabelMoment" active="{{ active }}">
+  <van-skeleton title row="7" loading="{{isLabelListLoaded}}"/>
   <van-tab   wx:for="{{labelList}}" wx:key="id" title="{{item.name}}"></van-tab>
 </van-tabs>
-<scroll-view scroll-y="true">
-<view class="moment-container" wx:for="{{labelMoment}}" wx:key="id">
+<van-empty wx:if="{{isShowEmpty}}" image="search" description="暂无文章，快来发表第一篇吧~" />
+<scroll-view scroll-y="true" 	bindscrolltolower="loadMore">
+<view class="moment-container" wx:for="{{loadMoreMoment}}" wx:key="id">
   <view class="acticle-card-header">
           <view class="acticle-card__userinfo">
             <view class="user-card">
@@ -56,5 +58,17 @@
           </view>
         </view>
 </view>
-  
+<view wx:if="{{isLoading&&loadMoreMoment.length<labelMoment.length}}" class="loading">
+  <van-loading type="spinner" />
+</view>
 </scroll-view>
+<view class="login-hint" wx:if="{{!loginStatus}}">
+  <van-notice-bar
+  background="#ecf9ff"
+  left-icon="info-o"
+  text="加入kuroneko创作更多优质内容吧~"
+>
+<van-button bind:tap="goToLogin" slot="right-icon" round type="info" color="orange" size="mini">马上登录</van-button>
+</van-notice-bar>
+</view>
+<back-top wx:if="{{isShowBackTop}}" selector=".label-list" />

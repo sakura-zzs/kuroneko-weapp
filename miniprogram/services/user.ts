@@ -11,5 +11,6 @@ export const bindAccountAndLogin=async(code:string,email:string,pwd:string):Prom
 export const checkLogin=async()=> {
   const loginStatusInfo = await kuronekoRequest.get({ url: '/authTest' })
   if (loginStatusInfo?.data?.code === 1006)  return false
+  if(loginStatusInfo.token)
   return true
 }

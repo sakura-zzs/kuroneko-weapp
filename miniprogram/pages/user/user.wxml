@@ -1,5 +1,9 @@
 <!--pages/user/user.wxml-->
 <van-toast id="van-toast" />
 <navigation-bar title="个人中心"/>
-<view bind:tap="publishing">发布</view>
+
+<van-cell-group>
+  <van-cell is-link><view slot="title" bind:tap="publishing">发布</view></van-cell>
+  <van-cell bind:tap="logout" title="退出登录" is-link />
+</van-cell-group>
 <login loginStatus="{{loginStatus}}"/>

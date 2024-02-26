@@ -1,5 +1,5 @@
 // pages/user/login/login.ts
-import {login,bindAccountAndLogin} from '@services/user'
+import {bindAccountAndLogin} from '@services/user'
 import Toast from '../../../miniprogram_npm/@vant/weapp/toast/toast'
 import {createStoreBindings}from 'mobx-miniprogram-bindings'
 import homeStore from'@store/useHome'
@@ -55,14 +55,8 @@ Component({
       if(!this.validateEmail()&&!this.validatePass()) return Toast.fail('请检查邮箱和密码!')
       //验证邮箱和密码格式
       const {email,pwd}=this.data
-          //code只能使用一次，再次使用需要重新获取
-    // const {code}=await wx.login()
-    //login用于用户进入小程序的默认登录行为，只有用户进行了登录行为绑定过才会直接登录，否则会返回错误
-    // const res=await login(code)
-    // console.log(res)
-    // if(res.code===1008){
       //未注册
-      //模拟登录未注册，帐号绑定测试
+      //登录未注册，帐号绑定
       const {code}=await wx.login()
       const res=await bindAccountAndLogin(code,email,pwd)
       if(res.code==1004)
@@ -72,7 +66,6 @@ Component({
       this.setLoginStatus(true)
       wx.switchTab({url:'/user'})
       return Toast.success('登录成功!')
-    // }
     },
     validateEmail():Boolean{
       const emailReg = /^[0-9a-zA-Z_-]+@[0-9a-zA-Z_-]+(.[0-9a-zA-Z_-]+)+$/

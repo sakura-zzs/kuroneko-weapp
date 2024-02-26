@@ -1,6 +1,7 @@
 // pages/user/user.ts
 import {createStoreBindings}from 'mobx-miniprogram-bindings'
 import homeStore from'@store/useHome'
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast'
 Page({
 
   /**
@@ -13,6 +14,13 @@ Page({
     if(this.data.loginStatus)
     wx.navigateTo({url:'../publish/publish'})
   },
+  logout(){
+    //清除token
+    wx.removeStorageSync('token')
+    //修改登录状态
+    this.setLoginStatus(false)
+    Toast.fail('退出登录!')
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -20,7 +28,7 @@ Page({
     this.homeStore=createStoreBindings(this,{
       store:homeStore,
       fields:['loginStatus'],
-      actions:[]
+      actions:['setLoginStatus']
     })
   },
 

@@ -1,0 +1,4 @@
+<!--components/back-top/back-top.wxml-->
+<view class="back-top" bind:tap="backTop">
+  <van-icon name="arrow-up" size="75rpx"/>
+</view>
