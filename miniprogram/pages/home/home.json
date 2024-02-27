@@ -11,7 +11,8 @@
     "van-skeleton": "@vant/weapp/skeleton/index",
     "van-empty": "@vant/weapp/empty/index",
     "van-loading": "@vant/weapp/loading/index",
-    "back-top":"../../components/back-top/back-top"
+    "back-top":"../../components/back-top/back-top",
+    "van-toast": "@vant/weapp/toast/index"
   },
   "onReachBottomDistance":100
 }

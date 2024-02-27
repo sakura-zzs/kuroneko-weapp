@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    loginStatus:false
+    loginStatus:false,
+    userInfo:{}
   },
   publishing(){
     if(this.data.loginStatus)
@@ -27,7 +28,7 @@ Page({
   onLoad(this:any) {
     this.homeStore=createStoreBindings(this,{
       store:homeStore,
-      fields:['loginStatus'],
+      fields:['loginStatus','userInfo'],
       actions:['setLoginStatus']
     })
   },

@@ -2,6 +2,8 @@
 import {createStoreBindings}from 'mobx-miniprogram-bindings'
 import homeStore from'@store/useHome'
 import {getEditorContents,uploadImage} from '@utils/util'
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast'
+import {createMoment,imagesBindToMoment,labelsBindToMoment} from '@services/publish'
 Page({
 
   /**
@@ -41,20 +43,51 @@ Page({
     maxSelectedCount:5    
   },
   async publishing(){
+    let {title,labelSelected}=this.data
+    const labelList=labelSelected.split(',')
+    title=title.trim()
+    if(!title.length)
+    return Toast.fail('请输入标题！')
+    if(title.length>30)
+      return Toast.fail('标题长度不能超过30！')
     const myEditor= this.selectComponent('.my-editor')
-    const {html,text,delta}=await getEditorContents(myEditor)
-    console.log(html,text,delta)
+    const {text,delta}=await getEditorContents(myEditor)
+    console.log(text,delta)
+    if(text.length<20)
+    return Toast.fail('内容不能少于20字！')
+    if(!labelList.length)
+    return Toast.fail('请至少选择1个标签！')
+    if(labelList.length>5)
+    return Toast.fail('最多只能选择5个标签！')
     //获取编辑器内容中所有的临时图片路径进行上传
     const tempFilePaths:Array<any>=[]
     delta.ops.forEach(e=>{
       if(e.attributes&&e.insert.image)
        tempFilePaths.push(uploadImage(e.insert.image))
     })
-    console.log(tempFilePaths)
-    const realFilePaths=await Promise.all(tempFilePaths)
-    console.log(realFilePaths)
-    console.log(this.data)
-    wx.switchTab({url:'../home/home'})
+    let realFilePaths:Array<{url:String,id:Number}>=[]
+    if(tempFilePaths.length){
+    const temp=await Promise.all(tempFilePaths)
+    realFilePaths=temp.map(v=>v.imgLinks)
+    //将临时路径替换为远程地址
+    let index=0
+    delta.ops.forEach(e=>{
+      if(e.attributes&&e.insert.image){
+        e.insert.image=realFilePaths[index++].url
+      }
+    })
+    myEditor.setContents({delta})
+    }
+    //上传动态
+    const {html}=await getEditorContents(myEditor)
+    const momentId=await createMoment(title,html)
+    //绑定动态图片
+    if(realFilePaths.length)
+    await imagesBindToMoment(realFilePaths,momentId)
+    //绑定动态标签
+    await labelsBindToMoment(labelList,momentId)
+    //wx.reLaunch会关闭所有页面，打开一个页面，这个页面会重新加载，实现数据实时更新
+    wx.reLaunch({url:'../home/home?published=true'})
   },
   handleShowPopup(){
     this.setData({
@@ -88,7 +121,7 @@ Page({
   },
   //提取分类选择数据源
   getLabelSelectSource(){
-    const labelList=this.data.labelList
+    const labelList=this.data.labelList.slice(1)
     const labelSelectSource=labelList.map(e=>({text:e.name,id:e.id}))
     this.setData({labelSelectMenu:[{
       // 导航名称

@@ -1,7 +1,11 @@
 <!--pages/user/user.wxml-->
 <van-toast id="van-toast" />
 <navigation-bar title="个人中心"/>
-
+<view class="user-info">
+<image wx:if="{{userInfo.avatar.url}}" src="{{userInfo.avatar.url}}" mode="widthFix"/>
+<image wx:else="" src="../../assets/home/user_default.png" mode="widthFix"/>
+<text class="nickName">{{userInfo.profile.nickName}}</text>
+</view>
 <van-cell-group>
   <van-cell is-link><view slot="title" bind:tap="publishing">发布</view></van-cell>
   <van-cell bind:tap="logout" title="退出登录" is-link />

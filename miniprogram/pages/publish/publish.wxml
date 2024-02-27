@@ -17,6 +17,7 @@
     value="{{ labelSelected }}"
     center
     clearable
+    readonly
     label="标签"
     border="{{ false }}"
     use-button-slot

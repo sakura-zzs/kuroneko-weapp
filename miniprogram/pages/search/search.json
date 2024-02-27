@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "kk-label":"../../components/label/label",
+    "van-empty": "@vant/weapp/empty/index"
+  }
+}

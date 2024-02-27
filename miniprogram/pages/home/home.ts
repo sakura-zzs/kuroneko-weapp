@@ -1,10 +1,11 @@
 // pages/index.ts
-import {checkLogin,login} from '@services/user'
+import {checkLogin,getUserInfo,login} from '@services/user'
 import {createStoreBindings}from 'mobx-miniprogram-bindings'
 import homeStore from'@store/useHome'
 import {getLabelList, getMomentList}from '@services/home'
 import { watch}from '@utils/util'
 import _ from 'loadsh'
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast'
 Page({
 
   /**
@@ -27,7 +28,8 @@ Page({
     isLabelListLoaded:true,
     //是否显示占位图
     isShowEmpty:false,
-    isShowBackTop:false
+    isShowBackTop:false,
+    userInfo:{}
   },
   async getLabel(this:any){
     const res=await getLabelList()
@@ -39,8 +41,12 @@ Page({
     this.setMomentList(res)
     this.setData({labelMoment:res,isLabelListLoaded:false})
   },
+  async getUserProfile(id:Number){
+    const res=await getUserInfo(id)
+    this.setUserInfo(res)
+  },
   //检测登录状态,尝试默认登录
-  async getLoginStatus(this:any){
+  async getLoginStatus(){
     const loginStatus=await checkLogin()
     //token不存在或已过期
     if(!loginStatus){
@@ -56,6 +62,8 @@ Page({
       //当前微信用户绑定过帐号，保存token
       wx.setStorageSync('token',res.token)
       this.setLoginStatus(true)
+      //获取用户信息
+      await this.getUserProfile(res.user.userId)
     }
     }else{
       this.setLoginStatus(loginStatus)
@@ -66,7 +74,7 @@ Page({
     this.setData({isShowEmpty:false})
     const labelMomentLen=this.setLabelMoment(labelName)
     if(!labelMomentLen){
-    this.setData({isShowEmpty:true,labelMoment:[]})
+    this.setData({isShowEmpty:true})
     }
   },
   loadMore(){
@@ -81,14 +89,31 @@ Page({
   goToLogin(){
     wx.switchTab({url:'../user/user'})
   },
+  searching(e){
+    let labelName=e.detail
+    if(!labelName||!labelName.length) return Toast.fail({message:'请输入合法关键词~',selector: '#home-toast'})
+    labelName=labelName.trim()
+    let labelList:Array<any>=this.data.labelList.slice(1)
+    labelList=labelList.map(e=>e.name+e.icon)
+    if(JSON.stringify(labelList).indexOf(labelName)===-1){
+      return Toast.fail({message:'当前关键词还没收录哦~',selector: '#home-toast'})
+    }
+    const app=getApp()
+    app.globalData.momentList=this.data.momentList
+    wx.navigateTo({url:`../search/search?title=${labelName}`})
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  async onLoad() {
+  async onLoad(option:Record<string, string | undefined>) {
+    //由发布页跳转而来，发布成功
+    if(option.published) {
+      Toast.success({message:'发布成功！',selector: '#home-toast'})
+    }
     //监听labelMoment的变化，同步到loadMoreMoment
     watch(this,this.data,'labelMoment',(newVal,oldVal)=>{
+      this.setData({loadMoreMoment:[]})
       if(newVal.length){
-        this.setData({loadMoreMoment:[]})
       setTimeout(()=>{
         this.loadMore()
       },500)
@@ -98,8 +123,8 @@ Page({
     //使用createStoreBindings将store数据映射到页面实例中
     this.homeStore=createStoreBindings(this,{
       store:homeStore,
-      fields:['labelList','momentList','labelMoment','loginStatus'],
-      actions:['setLabelList','setMomentList','setLabelMoment','setLoginStatus']
+      fields:['labelList','momentList','labelMoment','loginStatus','userInfo'],
+      actions:['setLabelList','setMomentList','setLabelMoment','setLoginStatus','setUserInfo']
     })
     await this.getLoginStatus()
     await this.getLabel()

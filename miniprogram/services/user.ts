@@ -14,3 +14,7 @@ export const checkLogin=async()=> {
   if(loginStatusInfo.token)
   return true
 }
+export const getUserInfo=async(id:Number)=>{
+    const  data = await kuronekoRequest.get({ url: `/user/profile?id=${id}` })
+    return data[0]
+}

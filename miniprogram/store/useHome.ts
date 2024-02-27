@@ -46,7 +46,8 @@ export interface IHomeStoreThisType{
   momentList:Array<IMomentData>,
   labelMoment:Array<IMomentData>,
   momentData:IMomentData|undefined,
-  loginStatus:Boolean
+  loginStatus:Boolean,
+  userInfo:any
 }
 const homeStore=observable({
   //数据
@@ -55,6 +56,7 @@ const homeStore=observable({
   labelMoment:[],
   momentData:"",
   loginStatus:false,
+  userInfo:{},
   //修改数据的action
   setLabelList:action(function(this:IHomeStoreThisType,list:Array<ILabelList>){
     this.labelList=list
@@ -71,9 +73,12 @@ const homeStore=observable({
         temList.push(e)
       }
     })
+    this.labelMoment=temList
     //暂无该标签数据
-    if(!temList.length) return false
-    return this.labelMoment=temList
+    if(!temList.length) {
+      return false
+    }
+    return true 
   }),
   setMomentData:action(function(this:IHomeStoreThisType,id:number){
     this.momentData= this.momentList.find(e=>e.id===id)
@@ -81,6 +86,9 @@ const homeStore=observable({
   setLoginStatus:action(function(this:IHomeStoreThisType,isLogin:Boolean){
     this.loginStatus=isLogin
 
+  }),
+  setUserInfo:action(function(this:IHomeStoreThisType,userInfo:any) {
+    this.userInfo=userInfo
   })
 })
 export default homeStore

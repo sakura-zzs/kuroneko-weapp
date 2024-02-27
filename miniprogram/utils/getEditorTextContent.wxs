@@ -1,0 +1,22 @@
+// function getContentText(wangEditorChildren) {
+//   wangEditorChildren = JSON.parse(wangEditorChildren)
+//   var res = ''
+//   wangEditorChildren.forEach(function(item){
+//     item.children.forEach(function(i){
+//       if (i.text != null) {
+//         // console.log(i.text)
+//         res += i.text
+//       }
+//     })
+//     res += '\n'
+//   })
+//   return res
+// }
+function getEditorTextContent(html){
+  //将html字符串的标签替换为空，提取出纯文本内容
+  var reg=getRegExp('<\/?[^>]+(>|$)','g')
+  return html.replace(reg, '')
+}
+module.exports={
+  getEditorTextContent:getEditorTextContent
+}
